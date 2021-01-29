@@ -12,7 +12,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'gbaragbo'
+NAME = 'django_gbaragboscrumy'
 DESCRIPTION = 'My short description for my project.'
 URL = 'https://github.com/me/myproject'
 EMAIL = 'me@example.com'
@@ -94,7 +94,7 @@ class UploadCommand(Command):
 
 # Where the magic happens:
 setup(
-    name=NAME,
+    name='django_gbaragboscrumy',
     version=about['__version__'],
     description=DESCRIPTION,
     long_description=long_description,
