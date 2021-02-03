@@ -21,5 +21,5 @@ from gbaragboscrumy import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('gbaragboscrumy', include('gbaragboscrumy.urls')),
-    path('movegoal/<int:goal_id>', views.move_goal)
+    path('gbaragboscrumy/movegoal/<int:goal_id>', views.move_goal)
 ]
