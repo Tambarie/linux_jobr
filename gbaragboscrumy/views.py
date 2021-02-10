@@ -10,4 +10,4 @@ def get_grading_parameters(request):
 def move_goal(request, goal_id):
     movegoal = ScrumyGoals.objects.get(pk =1)
     goalname = movegoal.goal_name
-    return HttpResponse(f"{goalname}%s" % goal_id) 
+    return HttpResponse(goalname) 
