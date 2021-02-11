@@ -24,5 +24,5 @@ urlpatterns = [
     path('gbaragboscrumy/movegoal/<int:goal_id>', views.move_goal),
     path('gbaragboscrumy/addgoal/', views.add_goal),
     path('gbaragboscrumy/home/', views.home),
-   
+    # path('gbaragboscrumy/home/', views.home_detail_view),
 ]
