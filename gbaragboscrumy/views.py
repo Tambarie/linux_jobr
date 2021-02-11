@@ -10,8 +10,15 @@ def get_grading_parameters(request):
     return HttpResponse('Learn Django')
 
 def move_goal(request, goal_id):
-    movegoal = ScrumyGoals.objects.get(pk =1)
-    goalname = movegoal.goal_name
+    context = {
+        'error':'A record with that goal id does not exist'
+    }
+    try:
+        obj = ScrumyGoals.objects.get(goal_id = goal_id)
+    except Exception as e:
+        return render(request,'gbaragboscrumy/exception.html',context)
+    else:
+        goalname = obj.goal_name
     return HttpResponse(goalname) 
 
 
