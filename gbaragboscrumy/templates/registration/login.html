@@ -1,4 +1,18 @@
-{%load static%}
+<!-- {%load static%}
 
 
-<a href="{%  url 'gbaragboscrumy:get_grading_parameters' %}">Index</a>
+<a href="{%  url 'gbaragboscrumy:get_grading_parameters' %}">Index</a> -->
+
+
+
+{% if form.errors %}
+    <p>Your username and passord didn't match</p>
+{% endif %}
+
+<form method ="post" action="">
+    {% csrf_token %}
+    <input name ="username"> 
+    <input name="password" >
+    <input type="submit" >
+</form>
+

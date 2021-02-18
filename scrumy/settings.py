@@ -125,3 +125,5 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'gbaragboscrumy.User'
 
+LOGIN_REDIRECT_URL = '/gbaragboscrumy/home'
+
