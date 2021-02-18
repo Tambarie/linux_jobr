@@ -22,7 +22,7 @@ def move_goal(request, goal_id):
     return HttpResponse(goalname) 
 
 
-#Lab 12
+#Lab 13
 def add_goal(request):
     user_one = User.objects.get(username ='louis')
     status= GoalStatus.objects.get(status_name = 'Weekly Goal')
@@ -45,20 +45,28 @@ def add_goal(request):
 #Lab13
 
 def home(request):
-    #goal = ScrumyGoals.objects.filter(goal_name = 'Keep Learning Django')
-#    output = ', '.join([eachgoal.goal_name for eachgoal in goal])
-#    return HttpResponse(output)
-    details = ScrumyGoals.objects.get(pk =1)
+    users = User.objects.all()
+    firstuser = users[0]
 
+    goalstatus = GoalStatus.objects.all()
+    weeklygoal = goalstatus[0]
+    dailygoal = goalstatus[1]
+    verifygoal = goalstatus[2]
+    donegoal = goalstatus[3]
     
+    goals  = firstuser.scrumygoals_set.all()
 
-    dictionary = {
-      'goal_name': details.goal_name,
-      'goal_id': details.goal_id,
-      'user': details.user
+    context = {
+        'firstuser': firstuser,
+        'weeklygoal':weeklygoal,
+        'dailygoal':dailygoal,
+        'verifygoal':verifygoal,
+        'donegoal':donegoal,
+        'goals':goals,
+        'users':users
     }
-    
-    return render(request, 'gbaragboscrumy/home.html',dictionary)
+
+    return render(request, 'gbaragboscrumy/home.html',context)
 
 
 

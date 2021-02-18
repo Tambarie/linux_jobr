@@ -1,34 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>GbaragboScrumy</title>
+    <style>
+        table,th,td{
+            border: 1px solid black;
+        }
+    </style>
 </head>
-
 <body>
-    {% block content %}
     <table>
-        <thead>
-            <tr>
-                <th> User </th>
-                <th> Weekly Goals </th>
-                <th> Daily Goals </th>
-                <th> Verify Goals </th>
-                <th> Done Goals </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{user}}</td>
-                <td>{{goal_name}}{{goal_id}}</td>
-            </tr>
-        </tbody>
-        </thead>
-    </table>
-    {% endblock %}
-</body>
+        <tr>
+            <th>Users</th>
+            <th>Weekly Goals</th>
+            <th>Daily Goals</th>
+            <th>Verify Goals</th>
+            <th>Done Goals</th> 
+        </tr>
 
+        <tr>
+{% for obj in users %}
+   
+            <td>{{obj}}</td>
+       
+
+    {% for goal in obj.scrumygoals_set.all %}
+    
+        {%if goal.goal_status.status_name == 'Weekly Goal'%}
+                <td> {{goal.goal_id}}{{goal.goal_name}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
+        {%elif goal.goal_status.status_name == 'Daily Goal'%}
+            <td> </td>
+            <td>{{goal.goal_id}}{{goal.goal_name}}</td>
+            <td></td>
+            <td></td>
+         
+        {%elif goal.goal_status.status_name  == 'Verify Goal'%}
+        <td></td>
+        <td></td>
+        <td>{{goal.goal_id}}{{goal.goal_name}}</td>
+        <td></td>
+
+        {%else%}
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{goal.goal_id}}{{goal.goal_name}}</td>
+            
+        {%endif%}
+    </tr>
+    {% endfor %} 
+{% endfor %}
+   
+    </table>
+</body>
 </html>
+
+
+
+
+
+
+
+
+<!-- 
+
+        
