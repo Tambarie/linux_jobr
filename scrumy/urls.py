@@ -18,11 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from gbaragboscrumy import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('gbaragboscrumy', include('gbaragboscrumy.urls')),
-    path('gbaragboscrumy/movegoal/<int:goal_id>', views.move_goal),
-    path('gbaragboscrumy/addgoal/', views.add_goal),
-    path('gbaragboscrumy/home/', views.home),
+    path('gbaragboscrumy/', include('gbaragboscrumy.urls',namespace ='gbaragboscrumy'))
+    
     # path('gbaragboscrumy/home/', views.home_detail_view),
 ]
