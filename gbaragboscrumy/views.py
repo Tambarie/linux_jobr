@@ -1,4 +1,5 @@
 from .models import ScrumyGoals,User,GoalStatus,ScrumyHistory
+from .forms import *
 from django.shortcuts import render
 from django.http import HttpResponse
 import random
@@ -6,8 +7,17 @@ import random
 
 
 # Create your views here.
-def get_grading_parameters(request):
-    return HttpResponse('Learn Django')
+def index_view(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    else:
+        form = SignupForm()
+
+
+    return render(request,'gbaragboscrumy/index.html', {'form':form})
 
 def move_goal(request, goal_id):
     context = {
@@ -24,17 +34,31 @@ def move_goal(request, goal_id):
 
 #Lab 13
 def add_goal(request):
-    user_one = User.objects.get(username ='louis')
-    status= GoalStatus.objects.get(status_name = 'Weekly Goal')
-    rand = random.randint(1000,9999)
-    
-    
-    add_goal= ScrumyGoals.objects.create(goal_name = 'Keep Learning Django',
-    goal_id= rand,created_by = 'Louis', moved_by ='Louis',
-    owner ='Louis',goal_status = status, user =user_one)
-    add_goal.save()
-    return HttpResponse ('Sucessfully Added')
 
+    if request.method == 'POST':
+        form = CreateGoalForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    else:
+        form =  CreateGoalForm()
+
+
+    return render(request,'gbaragboscrumy/index.html', {'form':form})
+
+
+    
+    # user_one = User.objects.get(username ='louis')
+    # status= GoalStatus.objects.get(status_name = 'Weekly Goal')
+    # rand = random.randint(1000,9999)
+    
+    
+    # add_goal= ScrumyGoals.objects.create(goal_name = 'Keep Learning Django',
+    # goal_id= rand,created_by = 'Louis', moved_by ='Louis',
+    # owner ='Louis',goal_status = status, user =user_one)
+    # add_goal.save()
+    # return HttpResponse ('Sucessfully Added')
+    
 
 # def home (request):
 #     goal = ScrumyGoals.objects.filter(goal_name = 'Keep Learning Django')
