@@ -2,6 +2,7 @@ from .models import ScrumyGoals,User,GoalStatus,ScrumyHistory
 from .forms import *
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.models import Group
 import random
 
 
@@ -12,6 +13,8 @@ def index_view(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
+            my_group = Group.objects.get(name ='Developer')
+            my_group.user_set.add(my_group)
 
     else:
         form = SignupForm()
@@ -47,7 +50,7 @@ def add_goal(request):
     return render(request,'gbaragboscrumy/index.html', {'form':form})
 
 
-    
+
     # user_one = User.objects.get(username ='louis')
     # status= GoalStatus.objects.get(status_name = 'Weekly Goal')
     # rand = random.randint(1000,9999)
