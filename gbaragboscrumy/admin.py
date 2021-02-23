@@ -6,6 +6,7 @@ from .forms import *
 admin.site.register(GoalStatus)
 admin.site.register(ScrumyHistory)
 admin.site.register(ScrumyGoals)
+admin.site.register(User)
 # admin.site.register(SignupForm)
 
 # Register your models here.

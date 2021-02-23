@@ -21,7 +21,7 @@ from gbaragboscrumy import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('gbaragboscrumy/', include('gbaragboscrumy.urls',namespace ='gbaragboscrumy'))
+    path('gbaragboscrumy/', include('gbaragboscrumy.urls',namespace ='gbaragboscrumy')),
     
-    # path('gbaragboscrumy/home/', views.home_detail_view),
+   
 ]

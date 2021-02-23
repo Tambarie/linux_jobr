@@ -5,11 +5,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    # username = models.CharField(max_length=20)
-    # first_name = models.CharField(max_length=20)
-    # last_name = models.CharField(max_length=20)
-    # password = models.CharField(max_length=20)
-    # email = models.EmailField(max_length=20)
     pass
 
 
@@ -30,7 +25,7 @@ class ScrumyGoals (models.Model):
     moved_by =models.CharField(max_length=20)
     owner = models.CharField(max_length=20)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    goal_status = models.ForeignKey(GoalStatus,on_delete=models.PROTECT)
+    goal_status = models.ForeignKey(GoalStatus,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.goal_name

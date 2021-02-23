@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import Group
 import random
+from django.contrib import messages
 
 
 
@@ -13,8 +14,14 @@ def index_view(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
+            user =User.objects.get(username = request.POST['username'])
             my_group = Group.objects.get(name ='Developer')
-            my_group.user_set.add(my_group)
+            my_group.user_set.add(user)
+           
+            if user.groups.filter(name = 'Developer').exists():
+                messages.success(request, f"Your account has been created successfully")
+
+           
 
     else:
         form = SignupForm()
@@ -37,17 +44,22 @@ def move_goal(request, goal_id):
 
 #Lab 13
 def add_goal(request):
-
     if request.method == 'POST':
         form = CreateGoalForm(request.POST)
-        if form.is_valid():
-            form.save()
-
+        cz=form.save(commit = False)
+        cz.goal_id = random.randrange(1000,99999,2)
+        cz.created_by = 'Louis'
+        cz.moved_by = 'Louis'
+        cz.owner = 'Louis'
+        cz.goal_status = GoalStatus.objects.get(status_name = 'Weekly Goal') 
+        cz.goal_status.save()
+        cz.save()
+        
     else:
         form =  CreateGoalForm()
 
 
-    return render(request,'gbaragboscrumy/index.html', {'form':form})
+    return render(request,'gbaragboscrumy/addgoal.html', {'form':form})
 
 
 

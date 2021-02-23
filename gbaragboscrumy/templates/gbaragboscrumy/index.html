@@ -1,6 +1,8 @@
 {% block content %}
 
-
+{%for message in messages%}
+{{message}}
+{%endfor%}
 <form method ="post" action="">
     {% csrf_token %}
     {{form}}
@@ -9,3 +11,7 @@
 
 
 {% endblock %}
+
+<div>
+    <a href="{% url 'gbaragboscrumy:add_goal'%}">Add Goal</a>
+</div>
