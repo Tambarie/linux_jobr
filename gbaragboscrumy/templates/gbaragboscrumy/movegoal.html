@@ -1,0 +1,14 @@
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Move Goal">
+   {% if messages %}
+        {% for message in messages %}
+               {{message}}
+        {% endfor %}
+    {% endif %}
+</form>
+</div>
+

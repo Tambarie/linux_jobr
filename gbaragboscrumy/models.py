@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.deletion import SET_NULL
 
 
 
@@ -20,7 +21,7 @@ class GoalStatus(models.Model):
 
 class ScrumyGoals (models.Model):
     goal_name =models.CharField(max_length=20)
-    goal_id = models.IntegerField()
+    goal_id = models.IntegerField(SET_NULL)
     created_by = models.CharField(max_length=20)
     moved_by =models.CharField(max_length=20)
     owner = models.CharField(max_length=20)

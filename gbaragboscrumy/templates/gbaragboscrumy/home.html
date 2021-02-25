@@ -1,68 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GbaragboScrumy</title>
     <style>
-        table,th,td{
+        table,
+        th,
+        td {
             border: 1px solid black;
         }
     </style>
 </head>
+
 <body>
-    
+    {{request.user}}
     <table>
+        <!-- {{csrf_token}} -->
         <tr>
             <th>Users</th>
             <th>Weekly Goals</th>
             <th>Daily Goals</th>
             <th>Verify Goals</th>
-            <th>Done Goals</th> 
+            <th>Done Goals</th>
         </tr>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{user.username.title}}</td>
 
-        <tr>
-{% for obj in users %}
-   
-            <td>{{obj}}</td>
-       
+                <td>
+                    {% for goal in user.scrumygoals_set.all %}
+                        {% if goal.goal_status.status_name == 'Weekly Goal' %}
+                        <a href="{% url 'gbaragboscrumy:movegoal' goal.goal_id %}">
+                        {{ goal.goal_name }}:<b>{{ goal.goal_id }}</b></a><br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
 
-    {% for goal in obj.scrumygoals_set.all %}
-    
-        {%if goal.goal_status.status_name == 'Weekly Goal'%}
-                <td> {{goal.goal_id}}{{goal.goal_name}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                
-        {%elif goal.goal_status.status_name == 'Daily Goal'%}
-            <td> </td>
-            <td>{{goal.goal_id}}{{goal.goal_name}}</td>
-            <td></td>
-            <td></td>
-         
-        {%elif goal.goal_status.status_name  == 'Verify Goal'%}
-        <td></td>
-        <td></td>
-        <td>{{goal.goal_id}}{{goal.goal_name}}</td>
-        <td></td>
 
-        {%else%}
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{goal.goal_id}}{{goal.goal_name}}</td>
-            
-        {%endif%}
-    </tr>
-    {% endfor %} 
-{% endfor %}
-   
+                <td>
+                    {% for goal in user.scrumygoals_set.all %}
+                        {% if goal.goal_status.status_name == 'Daily Goal' %}
+                        
+                        <a href="{% url 'gbaragboscrumy:movegoal' goal.goal_id %}">{{ goal.goal_name }}:<b>{{ goal.goal_id }}</b></a><br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+
+
+                <td>
+                    {% for goal in user.scrumygoals_set.all %}
+                        {% if goal.goal_status.status_name == 'Verify Goal' %}
+                        <a href="{% url 'gbaragboscrumy:movegoal' goal.goal_id %}">
+                        {{ goal.goal_name }}:<b>{{ goal.goal_id }}</b></a><br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+
+
+                <td>
+                    {% for goal in user.scrumygoals_set.all %}
+                        {% if goal.goal_status.status_name == 'Done Goal' %}
+                        <a href="{% url 'gbaragboscrumy:movegoal' goal.goal_id %}">
+                        {{ goal.goal_name }}:<b>{{ goal.goal_id }}</b></a><br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+
+            </tr>
+                {% endfor %}
+        </tbody>
+
     </table>
 
-   
+
 </body>
+
 </html>
 
 
