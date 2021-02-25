@@ -11,9 +11,4 @@ urlpatterns = [
     path('addgoal/', views.add_goal,name = "add_goal"),
     path('home/', views.home, name  ="home"),
     path('accounts/',include('django.contrib.auth.urls'),name = "accounts")
-
-
-    
-    # path('', views.home_detail_view),
-
 ]

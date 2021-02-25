@@ -22,6 +22,7 @@ from gbaragboscrumy import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('gbaragboscrumy/', include('gbaragboscrumy.urls',namespace ='gbaragboscrumy')),
+    path('websocket/', include('websocket.urls', namespace='websocket')),
     
    
 ]
