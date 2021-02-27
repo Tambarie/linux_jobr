@@ -20,7 +20,7 @@ class GoalStatus(models.Model):
 
 
 class ScrumyGoals (models.Model):
-    goal_name =models.CharField(max_length=20)
+    goal_name =models.CharField(max_length=200)
     goal_id = models.IntegerField(SET_NULL)
     created_by = models.CharField(max_length=20)
     moved_by =models.CharField(max_length=20)

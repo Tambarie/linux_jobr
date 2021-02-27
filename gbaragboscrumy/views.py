@@ -81,7 +81,7 @@ def move_goal(request, goal_id):
                     status_name = 'Verify Goal') == goal.goal_status:
                     if form.is_valid():
                         if GoalStatus.objects.get(
-                            status_name = 'Verify Goal') != goal.goal_status \
+                            status_name = 'Daily Goal') != goal.goal_status \
                             and GoalStatus.objects.get(
                                 status_name = 'Done Goal') != goal.goal_status:
                                 messages.error(request, 'You cannot perform this operation')
